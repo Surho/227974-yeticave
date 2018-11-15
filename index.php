@@ -1,8 +1,26 @@
 <?php
 $is_auth = rand(0, 1);
 
-$user_name = ''; // укажите здесь ваше имя
+$user_name = 'Surkho'; // укажите здесь ваше имя
 $user_avatar = 'img/user.jpg';
+
+$user_authorized = '
+    <div class="user-menu__image">
+        <img src="img/user.jpg" width="40" height="40" alt="Пользователь">
+    </div>
+    <div class="user-menu__logged">
+    <p>' . $user_name . '</p>
+    </div>';
+
+$user_unauthorized = '
+    <ul class="user-menu__list">
+        <li class="user-menu__item">
+        <a href="#">Регистрация</a>
+        </li>
+        <li class="user-menu__item">
+        <a href="#">Вход</a>
+        </li>
+    </ul>';
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -29,7 +47,13 @@ $user_avatar = 'img/user.jpg';
 
         <nav class="user-menu">
 
-        <!-- здесь должен быть PHP код для показа аватара пользователя -->
+        <?php 
+            if($is_auth === 1) {
+                print($user_authorized);
+            } else {
+                print($user_unauthorized);
+            }
+         ?>
 
         </nav>
     </div>
