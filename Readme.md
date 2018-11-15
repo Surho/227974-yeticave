@@ -1,7 +1,7 @@
 # Личный проект «YetiCave»
 
 * Студент: [Сурхо Курумов](https://up.htmlacademy.ru/php/7/user/227974).
-* Наставник: `Неизвестно`.
+* Наставник: [Антон Попов](https://up.htmlacademy.ru/php/7/user/78239).
 
 ---
 
