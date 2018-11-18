@@ -1,9 +1,48 @@
 <?php
 $is_auth = rand(0, 1);
 
-$user_name = 'Surkho'; // укажите здесь ваше имя
+$user_name = 'Surkho';
 $user_avatar = 'img/user.jpg';
 
+$categories = ["Доски и лыжи", "Крепления", "Ботинки", "Одежда", "Инструменты", "Разное"];
+$lots = [
+    [
+        'name' => '2014 Rossignol District Snowboard',
+        'categorie' => 'Доски и лыжи',
+        'price' => 10999,
+        'url' => 'img/lot-1.jpg'
+    ],
+    [
+        'name' => 'DC Ply Mens 2016/2017 Snowboard',
+        'categorie' => 'Доски и лыжи',
+        'price' => 159999,
+        'url' => 'img/lot-2.jpg'
+    ],
+    [
+        'name' => 'Крепления Union Contact Pro 2015 года размер L/XL',
+        'categorie' => 'Крепления',
+        'price' => 8000,
+        'url' => 'img/lot-3.jpg'
+    ],
+    [
+        'name' => 'Ботинки для сноуборда DC Mutiny Charocal',
+        'categorie' => 'Ботинки',
+        'price' => 10999,
+        'url' => 'img/lot-4.jpg'
+    ],
+    [
+        'name' => 'Куртка для сноуборда DC Mutiny Charocal',
+        'categorie' => 'Одежда',
+        'price' => 7500,
+        'url' => 'img/lot-5.jpg'
+    ],
+    [
+        'name' => 'Маска Oakley Canopy',
+        'categorie' => 'Разное',
+        'price' => 5400,
+        'url' => 'img/lot-6.jpg'
+    ]
+];
 ?>
 
 <!DOCTYPE html>
@@ -30,14 +69,14 @@ $user_avatar = 'img/user.jpg';
         <a class="main-header__add-lot button" href="pages/add-lot.html">Добавить лот</a>
 
         <nav class="user-menu">
-            <?php if($is_auth): ?> 
+            <?php if($is_auth): ?>
                 <div class="user-menu__image">
                     <img src="img/user.jpg" width="40" height="40" alt="Пользователь">
                 </div>
                 <div class="user-menu__logged">
                     <p><?=$user_name?></p>
                 </div>
-            <?php else: ?> 
+            <?php else: ?>
                 <ul class="user-menu__list">
                     <li class="user-menu__item">
                     <a href="#">Регистрация</a>
