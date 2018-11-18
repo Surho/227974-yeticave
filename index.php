@@ -4,41 +4,67 @@ $is_auth = rand(0, 1);
 $user_name = 'Surkho';
 $user_avatar = 'img/user.jpg';
 
-$categories = ["Доски и лыжи", "Крепления", "Ботинки", "Одежда", "Инструменты", "Разное"];
+$categories = [
+    [
+        'name' => 'Доски и лыжи',
+        'class' => 'promo__item--boards'
+    ],
+    [
+        'name' => 'Крепления',
+        'class' => 'promo__item--attachment'
+    ],
+    [
+        'name' => 'Ботинки',
+        'class' => 'promo__item--boots'
+    ],
+    [
+        'name' => 'Одежда',
+        'class' => 'promo__item--clothing'
+    ],
+     [
+        'name' => 'Инструменты',
+        'class' => 'promo__item--tools'
+     ],
+    [
+        'name' => 'Разное',
+        'class' => 'promo__item--other'
+    ]
+];
+
 $lots = [
     [
         'name' => '2014 Rossignol District Snowboard',
-        'categorie' => 'Доски и лыжи',
+        'categorie' => $categories[0]['name'],
         'price' => 10999,
         'url' => 'img/lot-1.jpg'
     ],
     [
         'name' => 'DC Ply Mens 2016/2017 Snowboard',
-        'categorie' => 'Доски и лыжи',
+        'categorie' => $categories[1]['name'],
         'price' => 159999,
         'url' => 'img/lot-2.jpg'
     ],
     [
         'name' => 'Крепления Union Contact Pro 2015 года размер L/XL',
-        'categorie' => 'Крепления',
+        'categorie' => $categories[2]['name'],
         'price' => 8000,
         'url' => 'img/lot-3.jpg'
     ],
     [
         'name' => 'Ботинки для сноуборда DC Mutiny Charocal',
-        'categorie' => 'Ботинки',
+        'categorie' => $categories[3]['name'],
         'price' => 10999,
         'url' => 'img/lot-4.jpg'
     ],
     [
         'name' => 'Куртка для сноуборда DC Mutiny Charocal',
-        'categorie' => 'Одежда',
+        'categorie' => $categories[4]['name'],
         'price' => 7500,
         'url' => 'img/lot-5.jpg'
     ],
     [
         'name' => 'Маска Oakley Canopy',
-        'categorie' => 'Разное',
+        'categorie' => $categories[5]['name'],
         'price' => 5400,
         'url' => 'img/lot-6.jpg'
     ]
@@ -69,7 +95,7 @@ $lots = [
         <a class="main-header__add-lot button" href="pages/add-lot.html">Добавить лот</a>
 
         <nav class="user-menu">
-            <?php if($is_auth): ?>
+            <?php if ($is_auth): ?>
                 <div class="user-menu__image">
                     <img src="img/user.jpg" width="40" height="40" alt="Пользователь">
                 </div>
@@ -79,12 +105,12 @@ $lots = [
             <?php else: ?>
                 <ul class="user-menu__list">
                     <li class="user-menu__item">
-                    <a href="#">Регистрация</a>
+                        <a href="#">Регистрация</a>
                     </li>
                     <li class="user-menu__item">
-                    <a href="#">Вход</a>
+                        <a href="#">Вход</a>
                     </li>
-                </ul>';
+                </ul>
             <?php endif; ?>
         </nav>
     </div>
@@ -95,14 +121,11 @@ $lots = [
         <h2 class="promo__title">Нужен стафф для катки?</h2>
         <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
         <ul class="promo__list">
-            <?php $categories_count = count($categories)?>
-            <?php $index = 0; ?>
-            <?php while($index < $categories_count) :?>
-                <li class="promo__item promo__item--boards">
-                    <a class="promo__link" href="pages/all-lots.html"><?=$categories[$index] ?></a>
+            <?php foreach($categories as $categorie) :?>
+                <li class="promo__item <?=$categorie['class']?>">
+                    <a class="promo__link" href="pages/all-lots.html"><?=$categorie['name']?></a>
                 </li>
-            <?php $index++;?>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
         </ul>
     </section>
     <section class="lots">
@@ -110,19 +133,18 @@ $lots = [
             <h2>Открытые лоты</h2>
         </div>
         <ul class="lots__list">
-            <!--заполните этот список из массива с товарами-->
-            <?php foreach( $lots as $key => $value) :?>
+            <?php foreach ($lots as $lot) :?>
                 <li class="lots__item lot">
                     <div class="lot__image">
-                        <img src="<?=$value['url']?>" width="350" height="260" alt="<?=$value['name']?>">
+                        <img src="<?=$lot['url']?>" width="350" height="260" alt="<?=$lot['name']?>">
                     </div>
                     <div class="lot__info">
-                        <span class="lot__category"><?=$value['categorie']?></span>
-                        <h3 class="lot__title"><a class="text-link" href="pages/lot.html"><?=$value['name']?></a></h3>
+                        <span class="lot__category"><?=$lot['categorie']?></span>
+                        <h3 class="lot__title"><a class="text-link" href="pages/lot.html"><?=$lot['name']?></a></h3>
                         <div class="lot__state">
                             <div class="lot__rate">
-                                <span class="lot__amount"><?=$value['price']?></span>
-                                <span class="lot__cost"><?=$value['price']?><b class="rub">р</b></span>
+                                <span class="lot__amount"><?=$lot['price']?></span>
+                                <span class="lot__cost"><?=$lot['price']?><b class="rub">р</b></span>
                             </div>
                             <div class="lot__timer timer">
                                 12:23
@@ -139,15 +161,11 @@ $lots = [
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
-            <!--заполните этот список из массива категорий-->
-            <?php $categories_count = count($categories)?>
-            <?php $index = 0; ?>
-            <?php while($index < $categories_count) :?>
+            <?php foreach($categories as $categorie) :?>
                 <li class="nav__item">
-                    <a href="pages/all-lots.html"><?=$categories[$index]?></a>
+                    <a href="pages/all-lots.html"><?=$categorie['name']?></a>
                 </li>
-            <?php $index++ ?>
-            <?php endwhile ?>
+            <?php endforeach?>
         </ul>
     </nav>
     <div class="main-footer__bottom container">
