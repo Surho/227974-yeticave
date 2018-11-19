@@ -52,6 +52,30 @@ $lots = [
         'url' => 'img/lot-6.jpg'
     ]
 ];
+
+function format_number($number) {
+    if($number < 1000) {
+        return $number;
+    };
+
+    $number = strval($number);
+    $number_length = strlen($number);
+    $parts_number = floor($number_length/3);
+    $formated = '';
+    $start = -$parts_number * 3;
+
+    if($number_length % 3 !== 0) {
+        $formated = substr($number, 0, $number_length - ($parts_number * 3));
+    }
+
+    while($parts_number > 0) {
+        $formated = $formated . ' ' . substr($number, $start, 3);
+        $start += 3;
+        $parts_number--;
+    }
+    return $formated . ' ₽';
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -126,8 +150,8 @@ $lots = [
                         <h3 class="lot__title"><a class="text-link" href="pages/lot.html"><?= $lot['name']; ?></a></h3>
                         <div class="lot__state">
                             <div class="lot__rate">
-                                <span class="lot__amount"><?= $lot['price']; ?></span>
-                                <span class="lot__cost"><?= $lot['price']; ?><b class="rub">р</b></span>
+                                <span class="lot__amount"><?= format_number($lot['price']); ?></span>
+                                <span class="lot__cost"><?= format_number($lot['price']); ?></span>
                             </div>
                             <div class="lot__timer timer">
                                 12:23
@@ -146,7 +170,7 @@ $lots = [
         <ul class="nav__list container">
             <?php foreach ($categories as $categorie) :?>
                 <li class="nav__item">
-                    <a href="pages/all-lots.html"><?= $categorie['name']; ?></a>
+                    <a href="pages/all-lots.html"><?= $categorie; ?></a>
                 </li>
             <?php endforeach; ?>
         </ul>
