@@ -52,29 +52,16 @@ $lots = [
         'url' => 'img/lot-6.jpg'
     ]
 ];
+// ₽
 
 function format_number($number) {
     if($number < 1000) {
         return $number;
-    };
-
-    $number = strval($number);
-    $number_length = strlen($number);
-    $parts_number = floor($number_length/3);
-    $formated = '';
-    $start = -$parts_number * 3;
-
-    if($number_length % 3 !== 0) {
-        $formated = substr($number, 0, $number_length - ($parts_number * 3));
+    } else {
+        $number = number_format($number, 0, '.', ' ');
+        return $number . ' ₽';
     }
-
-    while($parts_number > 0) {
-        $formated = $formated . ' ' . substr($number, $start, 3);
-        $start += 3;
-        $parts_number--;
-    }
-    return $formated . ' ₽';
-}
+};
 
 ?>
 
@@ -128,7 +115,7 @@ function format_number($number) {
         <h2 class="promo__title">Нужен стафф для катки?</h2>
         <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
         <ul class="promo__list">
-            <?php foreach ($categories as $class_name => $categorie) :?>
+            <?php foreach($categories as $class_name => $categorie): ?>
                 <li class="promo__item promo__item--<?= $class_name; ?>">
                     <a class="promo__link" href="pages/all-lots.html"><?= $categorie; ?></a>
                 </li>
@@ -140,7 +127,7 @@ function format_number($number) {
             <h2>Открытые лоты</h2>
         </div>
         <ul class="lots__list">
-            <?php foreach ($lots as $lot) :?>
+            <?php foreach($lots as $lot): ?>
                 <li class="lots__item lot">
                     <div class="lot__image">
                         <img src="<?= $lot['url']; ?>" width="350" height="260" alt="<?= $lot['name']; ?>">
@@ -168,7 +155,7 @@ function format_number($number) {
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
-            <?php foreach ($categories as $categorie) :?>
+            <?php foreach($categories as $categorie): ?>
                 <li class="nav__item">
                     <a href="pages/all-lots.html"><?= $categorie; ?></a>
                 </li>
