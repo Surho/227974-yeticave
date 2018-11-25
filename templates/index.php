@@ -13,5 +13,9 @@
     <div class="lots__header">
         <h2>Открытые лоты</h2>
     </div>
-    <?= $lots; ?>
+    <ul class="lots__list">
+        <?php foreach($lots as $lot): ?>
+            <?= include_template('lot.php', ['lot' => $lot]); ?>
+        <?php endforeach; ?>
+    </ul>
 </section>
