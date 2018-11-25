@@ -2,7 +2,7 @@
 function include_template($name, $data) {
     $name = 'templates/' . $name;
 
-    if (!file_exists($name)) {
+    if (!is_readable($name)) {
         return '';
     }
 
