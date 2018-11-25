@@ -23,4 +23,17 @@ function format_number($number) {
     return $number . ' ₽';
 };
 
+/**
+ * counting and printing time to midnight
+ */
+function time_to_midnight() {
+    date_default_timezone_set('Europe/Moscow');
+
+    $now = date_create('now');
+    $midnight = date_create('tomorrow midnight');
+    $diff = date_diff($now, $midnight);
+
+    $time_remaining = date_interval_format($diff, '%H : %I');
+    print($time_remaining);
+}
 
