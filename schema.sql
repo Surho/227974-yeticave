@@ -18,7 +18,7 @@ CREATE TABLE  users (
 CREATE TABLE lot (
   id INT AUTO_INCREMENT PRIMARY KEY,
   category_id INT NOT NULL,
-  user_id_winner INT NOT NULL,
+  user_id_winner INT,
   user_id_author INT NOT NULL,
   name CHAR(255) NOT NULL,
   creation_date datetime,
@@ -38,6 +38,6 @@ CREATE TABLE bid (
 
 CREATE TABLE category (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  categories CHAR(255) NOT NULL UNIQUE,
-  alias CHAR(255)
+  name CHAR(255) NOT NULL UNIQUE,
+  alias CHAR(255) DEFAULT NULL
 );
