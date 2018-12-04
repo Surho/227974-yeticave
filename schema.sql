@@ -26,6 +26,7 @@ CREATE TABLE lot (
   description CHAR(255),
   image CHAR(255),
   init_price INT,
+  price INT,
   step INT
 );
 
@@ -41,3 +42,5 @@ CREATE TABLE category (
   name CHAR(255) NOT NULL UNIQUE,
   alias CHAR(255) DEFAULT NULL
 );
+
+
