@@ -37,3 +37,14 @@ function time_to_midnight() {
     print($time_remaining);
 }
 
+/**
+ * filtrating user input
+ * @param string $str - string from user
+ * @return string $text - filtrated string
+ */
+function esc($str) {
+	$text = htmlspecialchars($str);
+
+	return $text;
+}
+

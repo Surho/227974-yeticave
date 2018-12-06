@@ -5,10 +5,10 @@ require_once('data.php');
 $con = mysqli_connect("localhost", "root", "sidrrdis12", "yeticave");
 mysqli_set_charset($con, "utf-8");
 
-$sql_lots = "SELECT *, lot.name AS lot_name, category.name AS category_name FROM  lot
+$sql_lots = 'SELECT image, init_price, price, lot.name AS lot_name, category.name AS category_name FROM  lot
 LEFT JOIN category
 ON lot.category_id = category.id
-ORDER BY creation_date DESC";
+ORDER BY creation_date DESC';
 
 $sql_category = 'SELECT name, alias  FROM category';
 

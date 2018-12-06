@@ -16,7 +16,7 @@
     </div>
     <ul class="lots__list">
         <?php foreach($lots as $lot): ?>
-            <?= include_template('lot.php', ['lot' => $lot]); ?>
+            <?= include_template('lot_card.php', ['lot' => $lot]); ?>
         <?php endforeach; ?>
     </ul>
 </section>
