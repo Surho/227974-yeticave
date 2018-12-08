@@ -23,7 +23,7 @@ CREATE TABLE lot (
   name CHAR(255) NOT NULL,
   creation_date datetime,
   end_date datetime,
-  description CHAR(255),
+  description TEXT,
   image CHAR(255),
   init_price INT,
   price INT,

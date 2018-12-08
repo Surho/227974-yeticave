@@ -46,5 +46,9 @@ function esc($str) {
 	$text = htmlspecialchars($str);
 
 	return $text;
-}
+};
 
+function navigate_to($url) {
+    header("Location: " . $url);
+    exit;
+}

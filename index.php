@@ -5,7 +5,7 @@ require_once('data.php');
 $con = mysqli_connect("localhost", "root", "sidrrdis12", "yeticave");
 mysqli_set_charset($con, "utf-8");
 
-$sql_lots = 'SELECT image, init_price, price, lot.name AS lot_name, category.name AS category_name FROM  lot
+$sql_lots = 'SELECT lot.id AS lot_id, image, init_price, price, lot.name AS lot_name, category.name AS category_name FROM  lot
 LEFT JOIN category
 ON lot.category_id = category.id
 ORDER BY creation_date DESC';
@@ -22,7 +22,6 @@ if(!$result_lots && !$result_category) {
 }
 
 $lots = mysqli_fetch_all($result_lots, MYSQLI_ASSOC);
-
 
 $page_content = include_template('index.php', [
     'categories' => $categories,
