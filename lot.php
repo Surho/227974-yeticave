@@ -9,6 +9,7 @@ if(!empty($_GET['lot_id'])) {
     LEFT JOIN category
     ON lot.category_id = category.id
     WHERE lot.id =' . intval($_GET['lot_id']);
+
     $result_sql = mysqli_query($con, $sql);
     $result_lot = mysqli_fetch_array($result_sql, MYSQLI_ASSOC);
 
@@ -17,11 +18,6 @@ if(!empty($_GET['lot_id'])) {
     }
 } else {
     navigate_to('pages/404.html');
-}
-
-if(!$result_sql) {
-    $error =  mysqli_error($con);
-    print('ошибка MySQL' . $error);
 }
 
 $page_content = include_template('lot.php',[
