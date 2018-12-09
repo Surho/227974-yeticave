@@ -14,10 +14,10 @@ if(!empty($_GET['lot_id'])) {
     $result_lot = mysqli_fetch_array($result_sql, MYSQLI_ASSOC);
 
     if(!$result_lot) {
-        navigate_to('pages/404.html');
+        navigate_to('templates/404.php');
     }
 } else {
-    navigate_to('pages/404.html');
+    navigate_to('templates/404.php');
 }
 
 $page_content = include_template('lot.php',[
