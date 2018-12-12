@@ -35,7 +35,7 @@ VALUES
   (3, '2018-08-24', 9600),
   (4, '2018-08-21', 12000);
 
-SELECT name FROM category;
+SELECT * FROM category;
 
 SELECT lot.name, init_price, image, category.name
 FROM lot

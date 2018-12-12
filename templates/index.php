@@ -2,10 +2,10 @@
     <h2 class="promo__title">Нужен стафф для катки?</h2>
     <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
     <ul class="promo__list">
-        <?php foreach($categories as $categorie_name => $categorie): ?>
-            <?= include_template('categorie.php', [
-                'categorie' => $categorie,
-                'categorie_name' => $categorie_name
+        <?php foreach($categories as $category_name => $category): ?>
+            <?= include_template('category.php', [
+                'category' => $category,
+                'category_name' => $category_name
             ]); ?>
         <?php endforeach; ?>
     </ul>
