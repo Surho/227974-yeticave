@@ -18,20 +18,73 @@ $page_content = include_template('add.php', [
 ]);
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $lot = $_POST['lot'];
 
-    $filename = uniqid() . '.png';
-    $lot['path'] = $filename;
+    $required = ['lot-name', 'end-date', 'message', 'start-price', 'step'];
+    $errors = [];
 
-    move_uploaded_file($_FILES['lot-image']['tmp_name'], 'img/' . $filename);
-    $lot['path'] = 'img/' . $filename;
+    foreach ($required as $key) {
+        if(empty($lot[$key])) {
+            $errors[$key] = 'поле надо заполнить';
+        }
+    }
 
-    $sql = 'INSERT INTO lot (category_id, user_id_winner, user_id_author, name, creation_date, end_date, description, image, init_price, price, step)
-    VALUES (?, 1, 1, ?, NOW(), ?, ?, ?, ?, ?, ?)';
 
-    $stmt = db_get_prepare_stmt($con, $sql, [$lot['category'], $lot['lot-name'], $lot['end-date'], $lot['message'], $lot['path'], $lot['start-price'],$lot['start-price'], $lot['step']]);
-    var_dump($stmt);
+
+    if (!empty($_FILES['lot-image']['name'])) {
+		$tmp_name = $_FILES['lot-image']['tmp_name'];
+        $path = $_FILES['lot-image']['name'];
+
+		$finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $file_type = finfo_file($finfo, $tmp_name);
+
+        if ($file_type === "image/jpeg" || $file_type === "image/png") {
+			$filename = uniqid() . '.jpeg';
+            $lot['path'] = $filename;
+
+            move_uploaded_file($_FILES['lot-image']['tmp_name'], 'img/' . $filename);
+            $lot['path'] = 'img/' . $filename;
+		} else {
+            $errors['file'] = 'Загрузите картинку в формате png или jpeg';
+            $lot['path'] = '';
+        }
+    }
+    else {
+        $lot['path'] = '';
+		$errors['file'] = 'Вы не загрузили файл';
+    }
+
+    if (count($errors)) {
+        var_dump(count($errors));
+        var_dump($errors);
+		$page_content = include_template('add.php', [
+            'errors' => $errors,
+            'categories' => $categories,
+        ]);
+    }
+
+    $sql = 'INSERT INTO lot (
+        category_id,
+        user_id_author,
+        name,
+        creation_date,
+        end_date,
+        description,
+        image,
+        init_price,
+        step
+    ) VALUES (?, 1, ?, NOW(), ?, ?, ?, ?, ?)';
+
+    $stmt = db_get_prepare_stmt($con, $sql, [
+        $lot['category'],
+        $lot['lot-name'],
+        $lot['end-date'],
+        $lot['message'],
+        $lot['path'],
+        $lot['start-price'],
+        $lot['step']
+    ]);
     $res = mysqli_stmt_execute($stmt);
 
     if ($res) {
@@ -42,5 +95,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 print($page_content);
+
+
+
+
 
 

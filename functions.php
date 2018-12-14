@@ -100,3 +100,23 @@ function navigate_to($url) {
     header("Location: " . $url);
     exit;
 }
+
+/**
+ * checking field validity
+ * @param $field - field to validate
+ * return $error - field error
+ */
+function check_field($field) {
+    $error = '';
+    if (empty([$field])) {
+        $error = 'Это поле надо заполнить';
+        if($field === 'start-price' || $field === 'step') {
+            !is_int($field) ? 'Поле принимает только числа' : '';
+        }
+    }
+    if($error) {
+        return $error;
+    } else {
+        return false;
+    }
+}

@@ -8,7 +8,7 @@
         <div class="lot__state">
             <div class="lot__rate">
                 <span class="lot__amount"><?= format_number(esc($lot['init_price'])); ?></span>
-                <span class="lot__cost"><?= format_number(esc($lot['price'])); ?></span>
+                <span class="lot__cost"><?= ($lot['price']) ? format_number(esc($lot['price'])) : ''; ?></span>
             </div>
             <div class="lot__timer timer">
                 <?= time_to_midnight(); ?>
