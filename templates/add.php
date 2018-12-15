@@ -80,7 +80,7 @@
       <div class="form__item form__item--wide <?= isset($errors['message']) ? "form__item--invalid" : ''; ?>">
         <label for="message">Описание</label>
         <textarea id="message" name="lot[message]" placeholder="<?= $field_data; ?>"></textarea>
-        <span class="form__error">Напишите описание лота</span>
+        <span class="form__error"><?= $errors['message'] ?></span>
       </div>
       <div class="form__item form__item--file <?= isset($errors['file']) ? "form__item--invalid" : ""; ?>">
         <label>Изображение</label>
@@ -95,7 +95,7 @@
           <label for="photo2">
             <span>+ Добавить</span>
           </label>
-          <span><?= isset($errors['lot-name']) ? 'Загрузите картинку' : ''; ?></span>
+          <span class="form__error"> <?= $errors['lot-name'] ?></span>
         </div>
       </div>
       <div class="form__container-three">
@@ -103,19 +103,19 @@
         <div class="form__item form__item--small <?= isset($errors['start-price']) ? "form__item--invalid" : ""; ?>">
           <label for="lot-rate">Начальная цена</label>
           <input id="lot-rate" type="number" name="lot[start-price]" placeholder="0" value=<?= $field_data; ?>>
-          <span class="form__error">Введите начальную цену</span>
+          <span class="form__error"><?= $errors['start-price'] ?></span>
         </div>
         <?php $field_data = isset($_POST['lot']['step']) ? $_POST['lot']['step'] : ""; ?>
         <div class="form__item form__item--small <?= isset($errors['step']) ? "form__item--invalid" : ""; ?>">
           <label for="lot-step">Шаг ставки</label>
           <input id="lot-step" type="number" name="lot[step]" placeholder="0" value=<?= $field_data; ?>>
-          <span class="form__error">Введите шаг ставки</span>
+          <span class="form__error"><?= $errors['step'] ?></span>
         </div>
         <?php $field_data = isset($_POST['lot']['end-date']) ? $_POST['lot']['end-date'] : ""; ?>
         <div class="form__item <?= isset($errors['end-date']) ? "form__item--invalid" : ""; ?>">
           <label for="lot-date">Дата окончания торгов</label>
           <input class="form__input-date" id="lot-date" type="date" name="lot[end-date]" value=<?= $field_data; ?>>
-          <span class="form__error">Введите дату завершения торгов</span>
+          <span class="form__error"><?= $errors['end-date'] ?></span>
         </div>
       </div>
       <span class="form__error form__error--bottom">Пожалуйста, исправьте ошибки в форме.</span>

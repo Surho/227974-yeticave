@@ -31,8 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // $errors[$field_name] = check_field($_POST['lot'][$field_name]);
-
     if (!empty($_FILES['lot-image']['name'])) {
 		$tmp_name = $_FILES['lot-image']['tmp_name'];
         $path = $_FILES['lot-image']['name'];
