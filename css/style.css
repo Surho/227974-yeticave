@@ -911,6 +911,14 @@ input:invalid .form__error{
   cursor: pointer;
 }
 
+.form__item--invalid label[for='photo2'] {
+  border: 2px solid red;
+}
+
+.form__item--invalid span {
+  color: red;
+}
+
 .form__item--file label span:hover {
   border-color: #45abde;
 }

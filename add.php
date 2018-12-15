@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     foreach ($required as $key) {
         if(empty($lot[$key])) {
-            $errors[$key] = 'поле надо заполнить';
+            $errors[$key] = 'Поле надо заполнить';
         }
     }
 
