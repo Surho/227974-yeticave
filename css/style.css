@@ -838,10 +838,11 @@ main.container {
   -ms-flex-pack: justify;
   justify-content: space-between;
   width: 730px;
+  margin-top: 20px;
 }
 
 .form__container-three {
-  margin-bottom: 25px;
+  margin-bottom: 35px;
 }
 
 .form__input-date {

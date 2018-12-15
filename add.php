@@ -30,8 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-
-
     if (!empty($_FILES['lot-image']['name'])) {
 		$tmp_name = $_FILES['lot-image']['tmp_name'];
         $path = $_FILES['lot-image']['name'];
@@ -52,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     else {
         $lot['path'] = '';
-		$errors['file'] = 'Вы не загрузили файл';
+		$errors['lot-image'] = 'Вы не загрузили файл';
     }
 
     if (count($errors)) {
@@ -90,7 +88,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($res) {
         $lot_id = mysqli_insert_id($con);
 
-        header("Location: lot.php?lot_id=" . $lot_id);
+        if(!count($errors)) {
+            header("Location: lot.php?lot_id=" . $lot_id);
+        }
     }
 }
 

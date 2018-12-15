@@ -97,29 +97,30 @@
           </div>
         </div>
         <div class="form__input-file <?= $classname; ?>">
-          <input class="visually-hidden" name="lot-image" type="file" id="photo2" value="">
+          <input class="visually-hidden" name="lot-image" type="file" id="photo2">
           <label for="photo2">
             <span>+ Добавить</span>
           </label>
+          <span><?= isset($errors['lot-name']) ? 'Загрузите картинку' : '' ?></span>
         </div>
       </div>
       <div class="form__container-three">
         <?php $classname = isset($errors['start-price']) ? "form__item--invalid" : "";
-              $field_data = isset($_POST['lot']['start-price']) ? $_POST['lot']['start-price'] : ''; ?>
+              $field_data = isset($_POST['lot']['start-price']) ? $_POST['lot']['start-price'] : ""; ?>
         <div class="form__item form__item--small <?= $classname; ?>">
           <label for="lot-rate">Начальная цена</label>
           <input id="lot-rate" type="number" name="lot[start-price]" placeholder="0" value=<?= $field_data; ?>>
           <span class="form__error">Введите начальную цену</span>
         </div>
         <?php $classname = isset($errors['step']) ? "form__item--invalid" : "";
-              $field_data = isset($_POST['lot']['step']) ? $_POST['lot']['step'] : ''; ?>
+              $field_data = isset($_POST['lot']['step']) ? $_POST['lot']['step'] : ""; ?>
         <div class="form__item form__item--small <?= $classname; ?>">
           <label for="lot-step">Шаг ставки</label>
           <input id="lot-step" type="number" name="lot[step]" placeholder="0" value=<?= $field_data; ?>>
           <span class="form__error">Введите шаг ставки</span>
         </div>
         <?php $classname = isset($errors['end-date']) ? "form__item--invalid" : "";
-              $field_data = isset($_POST['lot']['end-date']) ? $_POST['lot']['end-date'] : ''; ?>
+              $field_data = isset($_POST['lot']['end-date']) ? $_POST['lot']['end-date'] : ""; ?>
         <div class="form__item <?= $classname; ?>">
           <label for="lot-date">Дата окончания торгов</label>
           <input class="form__input-date" id="lot-date" type="date" name="lot[end-date]" value=<?= $field_data; ?>>
