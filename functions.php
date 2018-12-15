@@ -109,7 +109,7 @@ function navigate_to($url) {
 function check_field($field) {
     $error = '';
 
-    if (empty([$field])) {
+    if (empty($field)) {
         $error = 'Это поле надо заполнить';
     }
 
@@ -119,5 +119,7 @@ function check_field($field) {
 
     if($error) {
         return $error;
+    } else {
+        return false;
     }
 }

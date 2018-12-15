@@ -24,11 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $required = ['lot-name', 'end-date', 'message', 'start-price', 'step'];
     $errors = [];
 
-    foreach ($required as $key) {
-        if(empty($lot[$key])) {
-            $errors[$key] = 'Поле надо заполнить';
+    foreach ($required as $field_name) {
+        $check = check_field($_POST['lot'][$field_name]);
+        if($check) {
+            $errors[$field_name] = $check;
         }
     }
+
+    // $errors[$field_name] = check_field($_POST['lot'][$field_name]);
 
     if (!empty($_FILES['lot-image']['name'])) {
 		$tmp_name = $_FILES['lot-image']['tmp_name'];
@@ -54,8 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (count($errors)) {
-        var_dump(count($errors));
-        var_dump($errors);
 		$page_content = include_template('add.php', [
             'errors' => $errors,
             'categories' => $categories,
@@ -87,7 +88,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($res) {
         $lot_id = mysqli_insert_id($con);
-
         if(!count($errors)) {
             header("Location: lot.php?lot_id=" . $lot_id);
         }
