@@ -7,7 +7,6 @@ $tpl_data = [];
 $page_content = include_template('sign-up.php', []);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    isset($_POST['email']);
     $form = $_POST;
     $errors = [];
 
@@ -18,44 +17,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $errors[$field] = "Не заполнено поле " . $field;
         }
     }
-    var_dump($errors);
-    var_dump(count($errors));
 
     if (empty($errors)) {
-        print('@222');
         $email = mysqli_real_escape_string($con, $form['email']);
         $sql = "SELECT id FROM users WHERE email = '$email'";
         $res = mysqli_query($con, $sql);
 
         if (mysqli_num_rows($res) > 0) {
-            $errors[] = 'Пользователь с этим email уже зарегистрирован';
+            $errors['email'] = 'Пользователь с этим email уже зарегистрирован';
         } else {
             $password = password_hash($form['password'], PASSWORD_DEFAULT);
             $sql = 'INSERT INTO users (
-                dt_add,
+                registration_date,
                 email,
                 name,
                 password,
+                avatar,
                 contacts
             )
-            VALUES (NOW(), ?, ?, ?, ?)';
+            VALUES (NOW(), ?, ?, ?, ?, ?)';
 
             $stmt = db_get_prepare_stmt($con, $sql, [
                 $form['email'],
                 $form['name'],
                 $password,
-                $form['message']
+                $form['message'],
+                "sadasdasadsdsa"
             ]);
-            var_dump($stmt);
             $res = mysqli_stmt_execute($stmt);
+
+            if ($res && empty($errors)) {
+                $page_content =  include_template('login.php', []);
+                print($page_content);
+
+                header("Location: /login.php");
+                exit();
+            }
         }
     } else {
-        print('!!!');
         $page_content = include_template('sign-up.php', [
             'errors' => $errors
         ]);
     }
 }
-print($page_content);
 
+print($page_content);
 

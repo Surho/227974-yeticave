@@ -1,4 +1,5 @@
 <?php
+require_once('data.php');
 require_once('init.php');
 require_once('functions.php');
 
@@ -28,4 +29,12 @@ $page_content = include_template('lot.php',[
     'lot_category' => $result_lot['category_name']
 ]);
 
-print($page_content);
+$layout_content = include_template('layout.php',[
+    'page_name' => 'Yeti - лот',
+    'user_name' => $user_name,
+    'is_auth' => $is_auth,
+    'page_content' => $page_content,
+    'categories' => $categories
+]);
+
+print($layout_content);
