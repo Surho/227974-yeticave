@@ -59,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'errors' => $errors,
             'categories' => $categories,
         ]);
-        print($page_content);
     } else {
         $sql = 'INSERT INTO lot (
             category_id,
@@ -83,14 +82,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $lot['step']
         ]);
         $res = mysqli_stmt_execute($stmt);
-
         if ($res) {
             $lot_id = mysqli_insert_id($con);
             header("Location: lot.php?lot_id=" . $lot_id);
         }
     }
-
 }
+
+print($page_content);
 
 
 

@@ -2,37 +2,36 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Добавление лота</title>
+  <title>Регистрация</title>
   <link href="css/normalize.min.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
 
 <div class="page-wrapper">
-
   <header class="main-header">
-  <div class="main-header__container container">
-    <h1 class="visually-hidden">YetiCave</h1>
-    <a class="main-header__logo" href="index.php">
-      <img src="img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
-    </a>
-    <form class="main-header__search" method="get" action="https://echo.htmlacademy.ru">
-      <input type="search" name="search" placeholder="Поиск лота">
-      <input class="main-header__search-btn" type="submit" name="find" value="Найти">
-    </form>
-    <a class="main-header__add-lot button" href="add.php">Добавить лот</a>
-    <nav class="user-menu">
-      <ul class="user-menu__list">
-        <li class="user-menu__item">
-          <a href="sign-up.html">Регистрация</a>
-        </li>
-        <li class="user-menu__item">
-          <a href="login.html">Вход</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</header>
+    <div class="main-header__container container">
+      <h1 class="visually-hidden">YetiCave</h1>
+      <a class="main-header__logo" href="index.php">
+        <img src="img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
+      </a>
+      <form class="main-header__search" method="get" action="https://echo.htmlacademy.ru">
+        <input type="search" name="search" placeholder="Поиск лота">
+        <input class="main-header__search-btn" type="submit" name="find" value="Найти">
+      </form>
+      <a class="main-header__add-lot button" href="add-lot.html">Добавить лот</a>
+      <nav class="user-menu">
+        <ul class="user-menu__list">
+          <li class="user-menu__item">
+            <a href="sign-up.html">Регистрация</a>
+          </li>
+          <li class="user-menu__item">
+            <a href="login.html">Вход</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
   <main>
     <nav class="nav">
@@ -57,70 +56,53 @@
         </li>
       </ul>
     </nav>
-    <form class="form form--add-lot container <?= !empty($errors) ? "form--invalid" : '' ?>" action="add.php" method="post" enctype="multipart/form-data"> <!-- form--invalid -->
-      <h2>Добавление лота</h2>
-      <div class="form__container-two">
-        <?php $field_data = isset($_POST['lot']['lot-name']) ? $_POST['lot']['lot-name'] : ''; ?>
-        <div class="form__item <?= isset($errors['lot-name']) ? "form__item--invalid" : ""; ?>">
-          <label for="lot-name">Наименование</label>
-          <input id="lot-name" type="text" name="lot[lot-name]" placeholder="Введите наименование лота" value= <?= $field_data; ?>>
-          <span class="form__error"><?= $errors['lot-name']; ?></span>
-        </div>
-        <div class="form__item">
-          <label for="category">Категория</label>
-          <select id="category" name="lot[category]">
-            <?php foreach($categories as $category): ?>
-                <option name=<?= $category['id']; ?> value=<?= $category['id']; ?>> <?= $category['name']; ?> </option>
-            <?php endforeach; ?>
-          </select>
-          <span class="form__error">Выберите категорию</span>
-        </div>
+    <?= $field_value = isset($_POST['email']) ? $_POST['email'] : ''?>
+    <form class="form container" action="sign-up.php" method="post" enctype="multipart/form-data"> <!-- form--invalid -->
+      <h2>Регистрация нового аккаунта</h2>
+      <div class="form__item <?= isset($errors['email']) ? "form__item--invalid" : ""; ?>"> <!-- form__item--invalid -->
+        <label for="email ">E-mail*</label>
+        <input class = "email" id="email" type="text" name="email" placeholder="Введите e-mail" value = <?= $field_value; ?>>
+        <span class="form__error">Введите e-mail</span>
       </div>
-      <?php $field_data = isset($_POST['lot']['message']) ? $_POST['lot']['message'] : 'Напишите описание лота'; ?>
-      <div class="form__item form__item--wide <?= isset($errors['message']) ? "form__item--invalid" : ''; ?>">
-        <label for="message">Описание</label>
-        <textarea id="message" name="lot[message]" placeholder="<?= $field_data; ?>"></textarea>
-        <span class="form__error"><?= $errors['message'] ?></span>
+      <?= $field_value = isset($_POST['password']) ? $_POST['password'] : "" ?>
+      <div class="form__item <?= isset($errors['password']) ? "form__item--invalid" : ""; ?>">
+        <label for="password">Пароль*</label>
+        <input class = password id="password" type="text" name="password" placeholder="Введите пароль" value= <?= $field_value ?> >
+        <span class="form__error">Введите пароль</span>
       </div>
-      <div class="form__item form__item--file <?= isset($errors['file']) ? "form__item--invalid" : ""; ?>">
-        <label>Изображение</label>
+      <?= $field_value = isset($_POST['name']) ? $_POST['name'] : ''?>
+      <div class="form__item <?= isset($errors['name']) ? "form__item--invalid" : ""; ?>">
+        <label for="name">Имя*</label>
+        <input class = name id="name" type="text" name="name" placeholder="Введите имя" value= <?= $field_value; ?>>
+        <span class="form__error">Введите имя</span>
+      </div>
+      <?= $field_value = isset($_POST['message']) ? $_POST['message'] : ""; ?>
+      <div class="form__item <?= isset($errors['message']) ? "form__item--invalid" : ""; ?>">
+        <label for="message">Контактные данные*</label>
+        <textarea class ="message" id="message" name="message" placeholder="Напишите как с вами связаться"><?= $field_value; ?></textarea>
+        <span class="form__error">Напишите как с вами связаться</span>
+      </div>
+      <div class="form__item form__item--file form__item--last">
+        <label>Аватар</label>
         <div class="preview">
           <button class="preview__remove" type="button">x</button>
           <div class="preview__img">
-            <img src="img/avatar.jpg" width="113" height="113" alt="Изображение лота">
+            <img src="img/avatar.jpg" width="113" height="113" alt="Ваш аватар">
           </div>
         </div>
-        <div class="form__input-file <?= isset($errors['lot-image']) ? "form__item--invalid" : ""; ?>">
-          <input class="visually-hidden" name="lot-image" type="file" id="photo2">
+        <div class="form__input-file">
+          <input class = avatar class="visually-hidden" type="file" id="photo2" value="">
           <label for="photo2">
             <span>+ Добавить</span>
           </label>
         </div>
       </div>
-      <div class="form__container-three">
-        <?php $field_data = isset($_POST['lot']['start-price']) ? $_POST['lot']['start-price'] : ""; ?>
-        <div class="form__item form__item--small <?= isset($errors['start-price']) ? "form__item--invalid" : ""; ?>">
-          <label for="lot-rate">Начальная цена</label>
-          <input id="lot-rate" type="number" name="lot[start-price]" placeholder="0" value=<?= $field_data; ?>>
-          <span class="form__error"><?= $errors['start-price'] ?></span>
-        </div>
-        <?php $field_data = isset($_POST['lot']['step']) ? $_POST['lot']['step'] : ""; ?>
-        <div class="form__item form__item--small <?= isset($errors['step']) ? "form__item--invalid" : ""; ?>">
-          <label for="lot-step">Шаг ставки</label>
-          <input id="lot-step" type="number" name="lot[step]" placeholder="0" value=<?= $field_data; ?>>
-          <span class="form__error"><?= $errors['step'] ?></span>
-        </div>
-        <?php $field_data = isset($_POST['lot']['end-date']) ? $_POST['lot']['end-date'] : ""; ?>
-        <div class="form__item <?= isset($errors['end-date']) ? "form__item--invalid" : ""; ?>">
-          <label for="lot-date">Дата окончания торгов</label>
-          <input class="form__input-date" id="lot-date" type="date" name="lot[end-date]" value=<?= $field_data; ?>>
-          <span class="form__error"><?= $errors['end-date'] ?></span>
-        </div>
-      </div>
       <span class="form__error form__error--bottom">Пожалуйста, исправьте ошибки в форме.</span>
-      <button type="submit" class="button">Добавить лот</button>
+      <button type="submit" class="button">Зарегистрироваться</button>
+      <a class="text-link" href="#">Уже есть аккаунт</a>
     </form>
   </main>
+
 </div>
 
 <footer class="main-footer">
