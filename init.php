@@ -1,7 +1,7 @@
 <?php
 
-
 session_start();
+
 if(!empty($_SESSION['user'])) {
     $is_auth = true;
     $user_name = $_SESSION['user']['name'];

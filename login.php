@@ -1,5 +1,4 @@
 <?php
-require_once('data.php');
 require_once('init.php');
 require_once('functions.php');
 
@@ -37,8 +36,6 @@ $sql_category = 'SELECT name, alias  FROM category';
 $result_category = mysqli_query($con, $sql_category);
 $categories = mysqli_fetch_all($result_category , MYSQLI_ASSOC);
 
-
-var_dump($errors);
 $page_content = include_template('login.php', [
     'errors' => $errors,
     'email' => $form['email'] ?? ''
@@ -46,7 +43,7 @@ $page_content = include_template('login.php', [
 
 $layout_content = include_template('layout.php', [
     'page_name' => 'Yeti - вход',
-    'user_name' => $user_name,
+    'user_name' => $user_name ?? "",
     'is_auth' => $is_auth,
     'page_content' => $page_content,
     'categories' => $categories

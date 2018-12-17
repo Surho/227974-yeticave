@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
     }
+
     // if($_FILES['avatar_image']) {
     //     $tmp_name = $_FILES['avatar_image']['tmp_name'];
     //     $path = $_FILES['avatar_image']['name'];
