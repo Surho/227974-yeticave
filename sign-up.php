@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $form['email'],
                 $form['name'],
                 $password,
-                $path,
+                $path ?? '',
                 $form['message'],
             ]);
             $res = mysqli_stmt_execute($stmt);
