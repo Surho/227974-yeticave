@@ -32,15 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $file_type = finfo_file($finfo, $tmp_name);
         $file_type = substr($file_type, 6);
 
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $file_type = finfo_file($finfo, $tmp_name);
-        $file_type = substr($file_type, 6);
-
-
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $file_type = finfo_file($finfo, $tmp_name);
-        $file_type = substr($file_type, 6);
-
         if ($file_type === "jpeg" || $file_type === "jpg" || $file_type === "png") {
             $filename = uniqid() ."." .$file_type;
             $path = $filename;
