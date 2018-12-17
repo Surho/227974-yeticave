@@ -24,15 +24,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // if($_FILES['avatar_image']) {
-    //     $tmp_name = $_FILES['avatar_image']['tmp_name'];
-    //     $path = $_FILES['avatar_image']['name'];
+    if(!empty($_FILES['avatar']['name'])) {
+        $tmp_name = $_FILES['avatar']['tmp_name'];
+        $path = $_FILES['avatar']['name'];
 
-	// 	$finfo = finfo_open(FILEINFO_MIME_TYPE);
-    //     $file_type = finfo_file($finfo, $tmp_name);
-    //     var_dump($file_type);
+		$finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $file_type = finfo_file($finfo, $tmp_name);
+        $file_type = substr($file_type, 6);
 
-    // }
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $file_type = finfo_file($finfo, $tmp_name);
+        $file_type = substr($file_type, 6);
+
+
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $file_type = finfo_file($finfo, $tmp_name);
+        $file_type = substr($file_type, 6);
+
+        if ($file_type === "jpeg" || $file_type === "jpg" || $file_type === "png") {
+            $filename = uniqid() ."." .$file_type;
+            $path = $filename;
+
+            move_uploaded_file($_FILES['avatar']['tmp_name'], 'img/' . $filename);
+            $path = 'img/' . $filename;
+        } else {
+            $errors['file'] = 'Загрузите картинку в формате png,jpg,jpeg';
+        }
+    }
 
     if (empty($errors)) {
         $email = mysqli_real_escape_string($con, $form['email']);
@@ -58,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $form['email'],
                 $form['name'],
                 $password,
-                "sdaadsda",
+                $path,
                 $form['message'],
             ]);
             $res = mysqli_stmt_execute($stmt);
