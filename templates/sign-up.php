@@ -61,22 +61,22 @@
       <div class="form__item <?= isset($errors['email']) ? "form__item--invalid" : ""; ?>"> <!-- form__item--invalid -->
         <label for="email ">E-mail*</label>
         <input class = "email" id="email" type="text" name="email" placeholder="Введите e-mail" value = <?= isset($_POST['email']) ? $_POST['email'] : ''; ?>>
-        <span class="form__error">Введите email</span>
+        <span class="form__error"><?= $errors['email']; ?></span>
       </div>
       <div class="form__item <?= isset($errors['password']) ? "form__item--invalid" : ""; ?>">
         <label for="password">Пароль*</label>
         <input class = password id="password" type="text" name="password" placeholder="Введите пароль" value= <?= isset($_POST['password']) ? $_POST['password'] : ''; ?>>
-        <span class="form__error">Введите пароль</span>
+        <span class="form__error"><?= $errors['password']; ?></span>
       </div>
       <div class="form__item <?= isset($errors['name']) ? "form__item--invalid" : ""; ?>">
         <label for="name">Имя*</label>
         <input class = name id="name" type="text" name="name" placeholder="Введите имя" value= <?= isset($_POST['name']) ? $_POST['name'] : ''; ?>>
-        <span class="form__error">Введите имя</span>
+        <span class="form__error"><?= $errors['name']; ?></span>
       </div>
       <div class="form__item <?= isset($errors['message']) ? "form__item--invalid" : ""; ?>">
         <label for="message">Контактные данные*</label>
         <textarea class ="message" id="message" name="message" placeholder="Напишите как с вами связаться"><?= isset($_POST['message']) ? $_POST['message'] : ""; ?></textarea>
-        <span class="form__error">Напишите как с вами связаться</span>
+        <span class="form__error"><?= $errors['message']; ?></span>
       </div>
       <div class="form__item form__item--file form__item--last">
         <label>Аватар</label>
@@ -87,7 +87,7 @@
           </div>
         </div>
         <div class="form__input-file">
-          <input class = "avatar, visually-hidden" type="file" id="photo2" value="">
+          <input name="avatar" class = "avatar, visually-hidden" type="file" id="photo2" value="">
           <label for="photo2">
             <span>+ Добавить</span>
           </label>

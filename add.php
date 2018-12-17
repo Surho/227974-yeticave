@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
 
     foreach ($required as $field_name) {
-        $check = check_field($_POST['lot'][$field_name]);
+        $check = check_field($field_name, $_POST['lot']);
         if($check) {
             $errors[$field_name] = $check;
         }

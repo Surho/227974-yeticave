@@ -101,21 +101,35 @@ function navigate_to($url) {
     exit;
 }
 
+
 /**
  * checking field validity
  * @param $field - field to validate
  * return $error - field error
  */
-function check_field($field) {
+function check_field($field, $form) {
     $error = '';
-    if (empty($field)) {
+
+    if (empty($form[$field])) {
         $error = 'Это поле надо заполнить';
     }
-
-    if($field === 'start-price' || $field === 'step') {
-        $error = !is_int($field) ? 'Поле принимает только числа' : '';
-        var_dump($error);
+    if($field === 'start-price') {
+       if(!is_int(intval($form['start-price']))) {
+            $error = 'Должно быть числом';
+        }
+        if($form['start-price'] < 0) {
+            $error = 'Должно быть число больше нуля';
+        }
     }
+    if($field === 'step') {
+        if(!is_int(intval($form['step']))) {
+             $error = 'Должно быть числом';
+         }
+         if($form['step'] < 0) {
+             $error = 'Должно быть число больше нуля';
+         }
+     }
+
 
     if($error) {
         return $error;
