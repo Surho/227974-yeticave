@@ -23,16 +23,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
     }
+    // if($_FILES['avatar_image']) {
+    //     $tmp_name = $_FILES['avatar_image']['tmp_name'];
+    //     $path = $_FILES['avatar_image']['name'];
 
-    if($_FILES['avatar_image']) {
-        $tmp_name = $_FILES['avatar_image']['tmp_name'];
-        $path = $_FILES['avatar_image']['name'];
+	// 	$finfo = finfo_open(FILEINFO_MIME_TYPE);
+    //     $file_type = finfo_file($finfo, $tmp_name);
+    //     var_dump($file_type);
 
-		$finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $file_type = finfo_file($finfo, $tmp_name);
-        var_dump($file_type);
-
-    }
+    // }
 
     if (empty($errors)) {
         $email = mysqli_real_escape_string($con, $form['email']);
@@ -64,10 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $res = mysqli_stmt_execute($stmt);
 
             if ($res && empty($errors)) {
-                $page_content =  include_template('login.php', []);
-                print($page_content);
-
-                header("Location: /login.php");
+                header("Location: /yeti/login.php");
                 exit();
             }
         }

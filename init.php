@@ -1,8 +1,15 @@
 <?php
 
-$is_auth = rand(0, 1);
 
-$user_name = 'Surkho';
+session_start();
+if(!empty($_SESSION['user'])) {
+    $is_auth = true;
+    $user_name = $_SESSION['user']['name'];
+} else {
+    $is_auth = false;
+}
+
+
 $user_avatar = 'img/user.jpg';
 
 $con = mysqli_connect("localhost", "root", "sidrrdis12", "yeticave");

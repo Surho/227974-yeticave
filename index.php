@@ -1,6 +1,5 @@
 <?php
 require_once('functions.php');
-require_once('data.php');
 require_once('init.php');
 
 
@@ -31,7 +30,7 @@ $page_content = include_template('index.php', [
 
 $layout = include_template('layout.php', [
     'page_name' => 'Yeti - главная',
-    'user_name' => $user_name,
+    'user_name' => $user_name ?? "",
     'is_auth' => $is_auth,
     'page_content' => $page_content,
     'categories' => $categories
