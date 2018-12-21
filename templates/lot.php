@@ -40,8 +40,13 @@
             <?php $bid_check = isset($bids) ? $bids : false;?>
             <?php if ($bid_check): ?>
                 <?php foreach(array_reverse($bids) as $bid): ?>
+                <?php foreach($users as $user) {
+                    if($user['id'] == $bid['user_id']){
+                        $user_name = $user['name'];
+                    }
+                } ?>
                     <tr class="history__item">
-                        <td class="history__name"><?= $user ?></td>
+                        <td class="history__name"><?= $user_name ?></td>
                         <td class="history__price"><?= $bid['sum_price'] ?> р</td>
                         <td class="history__time"><?= $bid['date'] ?></td>
                     </tr>

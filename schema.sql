@@ -21,7 +21,7 @@ CREATE TABLE lot (
   user_id_winner INT,
   user_id_author INT NOT NULL,
   name CHAR(255) NOT NULL,
-  creation_date datetime,
+  creation_date datetime DEFAULT NOW(),
   end_date datetime,
   description TEXT,
   image CHAR(255),
@@ -33,8 +33,9 @@ CREATE TABLE lot (
 CREATE TABLE bid (
   id INT AUTO_INCREMENT PRIMARY KEY,
   lot_id INT NOT NULL,
-  date datetime,
-  sum_price INT
+  date datetime DEFAULT NOW(),
+  sum_price INT,
+  user_id INT
 );
 
 CREATE TABLE category (
