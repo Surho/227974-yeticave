@@ -21,7 +21,7 @@ if(($_SERVER['REQUEST_METHOD'] == 'POST')) {
             $bid_price
         ]);
         $res = mysqli_stmt_execute($stmt);
-        //maby update price in lot
+
     } else {
         $error = 'Ставка введена неверно';
     }

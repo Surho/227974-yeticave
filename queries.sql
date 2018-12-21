@@ -55,9 +55,9 @@ WHERE id = 1;
 
 SELECT *
 FROM bid
-ORDER BY date DESC
 WHERE lot_id = 3
-LIMIT 3;
+LIMIT 3
+ORDER BY date DESC;
 
 
 
