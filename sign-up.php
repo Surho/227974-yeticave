@@ -6,6 +6,10 @@ $tpl_data = [];
 
 $page_content = include_template('sign-up.php', []);
 
+$sql_category = 'SELECT name, alias  FROM category';
+$result_category = mysqli_query($con, $sql_category);
+$categories = mysqli_fetch_all($result_category , MYSQLI_ASSOC);
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $form = $_POST;
     $errors = [];
@@ -67,13 +71,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $form['email'],
                 $form['name'],
                 $password,
-                $path ?? '',
+                $path ?? "",
                 $form['message'],
             ]);
             $res = mysqli_stmt_execute($stmt);
 
             if ($res && empty($errors)) {
-                header("Location: /yeti/login.php");
+                header("Location: login.php");
                 exit();
             }
         }
@@ -84,5 +88,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-print($page_content);
+$layout_content = include_template('layout.php', [
+    'page_name' => 'Yeti - регистрация',
+    'user_name' => $user_name ?? "",
+    'is_auth' => $is_auth,
+    'page_content' => $page_content,
+    'categories' => $categories
+]);
+
+print($layout_content);
 

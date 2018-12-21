@@ -2,6 +2,8 @@
 
 session_start();
 
+date_default_timezone_set("Europe/Moscow");
+
 if(!empty($_SESSION['user'])) {
     $is_auth = true;
     $user_name = $_SESSION['user']['name'];

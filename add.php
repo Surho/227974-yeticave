@@ -3,7 +3,22 @@ require_once('init.php');
 require_once('functions.php');
 
 if(!$is_auth) {
+    $sql_category = 'SELECT name, alias  FROM category';
+    $result_category = mysqli_query($con, $sql_category);
+    $categories = mysqli_fetch_all($result_category , MYSQLI_ASSOC);
+
     header('HTTP/1.0 403 Forbidden');
+
+    $page_content = include_template('403.php', []);
+    $layout_content = include_template('layout.php', [
+        'page_name' => 'Yeti - 403 Forbidden',
+        'user_name' => $user_name ?? "",
+        'is_auth' => $is_auth,
+        'page_content' => $page_content,
+        'categories' => $categories
+    ]);
+
+    print($layout_content);
     exit();
 }
 
@@ -14,8 +29,8 @@ if ($result) {
     $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 else {
-    $error = mysqli_error($link);
-    show_error($content, $error);
+    $error = mysqli_error($con);
+    // show_error($content, $error);
 }
 
 $page_content = include_template('add.php', [
@@ -74,8 +89,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             description,
             image,
             init_price,
+            price,
             step
-        ) VALUES (?, 1, ?, NOW(), ?, ?, ?, ?, ?)';
+        ) VALUES (?, 1, ?, NOW(), ?, ?, ?, ?, ?, ?)';
 
         $stmt = db_get_prepare_stmt($con, $sql, [
             $lot['category'],
@@ -83,6 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $lot['end-date'],
             $lot['message'],
             $lot['path'],
+            $lot['start-price'],
             $lot['start-price'],
             $lot['step']
         ]);

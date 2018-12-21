@@ -113,6 +113,9 @@ function check_field($field, $form) {
     if (empty($form[$field])) {
         $error = 'Это поле надо заполнить';
     }
+
+    var_dump(($form['step']));
+
     if($field === 'start-price') {
        if(!is_int(intval($form['start-price']))) {
             $error = 'Должно быть числом';
